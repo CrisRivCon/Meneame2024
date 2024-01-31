@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Publicacion extends Model
 {
@@ -12,9 +13,9 @@ class Publicacion extends Model
 
     protected $table = 'publicaciones';
 
-    public function comentarios()
+    public function comentarios(): MorphMany
     {
-        return $this->hasMany(Comentario::class);
+        return $this->morphMany(Comentario::class, 'comentable');
     }
 
     public function usuario()
