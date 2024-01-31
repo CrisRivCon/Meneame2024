@@ -42,4 +42,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function meneos()
+    {
+        return $this->belongsToMany(Publicacion::class, 'publicacion_usuario');
+    }
+
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
+
+    public function publicaciones()
+    {
+        return $this->hasMany(Publicacion::class);
+    }
 }
