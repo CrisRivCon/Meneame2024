@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('descripcion');
             $table->foreignId('publicacion_id')->constrained('publicaciones');
             $table->foreignId('usuario_id')->constrained('users');
-            $table->uuidMorphs('comentable');
+            $table->morphs('comentable');
             $table->timestamps();
         });
     }
