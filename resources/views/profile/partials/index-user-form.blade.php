@@ -3,7 +3,9 @@
         <tbody>
             <div class="flex flex-col items-left mb-6">
                 <h1 class="font-sans text-6xl text-orange-500 mb-3">{{ Auth::user()->name }}</h1>
-                <p class="font-sans text-gray-700 font-bold">En menéame desde {{ obtenerMes(Auth::user()->created_at) }} de 2024</p>
+                <p class="font-sans text-gray-700 font-bold">En menéame desde
+                    {{obtenerMes(Auth::user()->created_at)}} de
+                    {{obtenerAnyo(Auth::user()->created_at)}}</p>
             </div>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-2 py-2 text-right font-medium text-gray-900 whitespace-nowrap dark:text-white">
