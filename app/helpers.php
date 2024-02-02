@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 function fecha($fecha)
 {
@@ -17,7 +17,7 @@ function obtenerAnyo($fecha)
     return $fecha->isoFormat('YYYY');
 }
 
-function obtenerIp(Request $request)
+function obtenerIp()
 {
-    return $request->ip();
+    return Http::get('https://ipinfo.io/ip');
 }
