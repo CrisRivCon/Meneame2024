@@ -59,7 +59,9 @@ class PublicacionController extends Controller
      */
     public function show(Publicacion $publicacion)
     {
-        //
+        return view('publicaciones.show', [
+            'publicacion' => $publicacion,
+        ]);
     }
 
     /**
