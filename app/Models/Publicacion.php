@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Http\Request;
 
 class Publicacion extends Model
 {
@@ -27,5 +28,7 @@ class Publicacion extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+
 
 }

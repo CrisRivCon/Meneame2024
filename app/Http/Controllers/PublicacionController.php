@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicacionController extends Controller
 {
@@ -22,7 +23,7 @@ class PublicacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('publicaciones.create');
     }
 
     /**
@@ -30,7 +31,25 @@ class PublicacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'titulo' => 'required|max:255',
+            'url' => 'required|max:255',
+            'descripcion' => 'required|max:600',
+
+        ]);
+
+        $publicacion = new Publicacion();
+        $imagen = $request->file('imagen');
+        dd($request);
+        $nombre = $publicacion->id . '.jpeg';
+        $imagen->storeAs('uploads', $nombre, 'public');
+        $publicacion->titulo = $request->input('titulo');
+        $publicacion->url = $request->input('url');
+        $publicacion->descripcion = $request->input('descripcion');
+        $publicacion->usuario_id = Auth::id();
+        $publicacion->save();
+
+        return redirect()->route('publicaciones.index');
     }
 
     /**
@@ -64,4 +83,6 @@ class PublicacionController extends Controller
     {
         //
     }
+
+
 }
