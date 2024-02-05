@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publicacion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,12 +41,13 @@ class PublicacionController extends Controller
 
         $publicacion = new Publicacion();
         $imagen = $request->file('imagen');
-        dd($request);
-        $nombre = $publicacion->id . '.jpeg';
+        //dd($request);
+        $nombre = Carbon::now() . '.jpeg';
         $imagen->storeAs('uploads', $nombre, 'public');
         $publicacion->titulo = $request->input('titulo');
         $publicacion->url = $request->input('url');
         $publicacion->descripcion = $request->input('descripcion');
+        $publicacion->imagen = $nombre;
         $publicacion->usuario_id = Auth::id();
         $publicacion->save();
 
