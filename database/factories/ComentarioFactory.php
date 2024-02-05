@@ -19,7 +19,6 @@ class ComentarioFactory extends Factory
     {
         return [
             'descripcion' => fake()->realText(),
-            'publicacion_id' => 1,
             'usuario_id' => 1,
         ];
     }
