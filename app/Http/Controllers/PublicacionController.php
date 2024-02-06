@@ -6,6 +6,9 @@ use App\Models\Publicacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class PublicacionController extends Controller
 {
@@ -43,7 +46,8 @@ class PublicacionController extends Controller
         $imagen = $request->file('imagen');
         //dd($request);
         $nombre = Carbon::now() . '.jpeg';
-        $imagen->storeAs('uploads', $nombre, 'public');
+        $manager = new ImageManager(new Driver());
+        $publicacion->guardarImagen($imagen, $nombre, 200, $manager);
         $publicacion->titulo = $request->input('titulo');
         $publicacion->url = $request->input('url');
         $publicacion->descripcion = $request->input('descripcion');
@@ -88,5 +92,26 @@ class PublicacionController extends Controller
         //
     }
 
+    public function guardar_imagen(Publicacion $publicacion, Request $request)
+    {
+        $mime = Publicacion::MIME_IMAGEN;
 
+        $request->validate([
+            'imagen' => "required|mimes:$mime|max:500",
+        ]);
+
+        $imagen = $request->file('imagen');
+        Storage::makeDirectory('public/uploads');
+        // $imagen->storeAs('uploads', $nombre, 'public');
+
+        $imagen_original = $imagen;
+        $manager = new ImageManager(new Driver());
+        $publicacion->guardarImagen($imagen, $publicacion->imagen, 400, $manager);
+        $imagen = $imagen_original;
+        $publicacion->guardarImagen($imagen, $publicacion->miniatura, 200, $manager);
+        return redirect()->route('publicaciones.index');
+    }
 }
+
+
+
