@@ -7,6 +7,15 @@
                     {{obtenerMes(Auth::user()->created_at)}} de
                     {{obtenerAnyo(Auth::user()->created_at)}}</p>
             </div>
+            <form method="GET" action="{{ route('profile.edit') }}">
+                @csrf
+                <button type="submit" class="text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900">Editar y configurar</button>
+            </form>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900">Desconectar</button>
+            </form>
+
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-2 py-2 text-right font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     Usuario

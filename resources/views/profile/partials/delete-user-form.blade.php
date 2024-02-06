@@ -1,19 +1,16 @@
 <section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
-
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
-
+    <div class="bg-red-200 px-4 py-2 rounded-md flex items-center justify-center flex-col">
+        <p class="font-sans text-2xl text-orange-500 mb-6">Deshabilitar la cuenta</p>
+        <p class="font-sans text-1xl text-red-500 mb-3 text-center">¡Atención! Si se deshabilita la
+            cuenta se eliminarán automáticamente los datos personales.</p>
+            <p class="font-sans text-1xl text-red-500 mb-3 text-center">Las notas serán eliminadas,
+                los envíos y comentarios NO se borrarán.</p>
+        <button class="bg-orange-500 text-white px-4 py-2 rounded-md mb-3" type="button"
+            x-data=""
+            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+        >{{ __('Delete Account') }}
+        </button>
+    </div>
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
             @csrf
