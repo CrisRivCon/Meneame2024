@@ -43,19 +43,9 @@ class Publicacion extends Model
         return '/uploads/' . $this->imagen;
     }
 
-    private function miniatura_url_relativa()
-    {
-        return '/uploads/' . $this->miniatura;
-    }
-
     public function getImagenUrlAttribute()
     {
         return Storage::url(mb_substr($this->imagen_url_relativa(), 1));
-    }
-
-    public function getMiniaturaUrlAttribute()
-    {
-        return Storage::url(mb_substr($this->miniatura_url_relativa(), 1));
     }
 
     public function existeImagen()
@@ -63,12 +53,7 @@ class Publicacion extends Model
         return Storage::disk('public')->exists($this->imagen_url_relativa());
     }
 
-    public function existeMiniatura()
-    {
-        return Storage::disk('public')->exists($this->miniatura_url_relativa());
-    }
-
-    public function guardarImagen(UploadedFile $imagen, string $nombre, int $escala, ?ImageManager $manager = null)
+    public function guardar_imagen(UploadedFile $imagen, string $nombre, int $escala, ?ImageManager $manager = null)
     {
         if ($manager === null) {
             $manager = new ImageManager(new Driver());

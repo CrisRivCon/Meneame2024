@@ -23,7 +23,8 @@ class PublicacionFactory extends Factory
             'titulo' => fake()->catchPhrase(),
             'url' => 'https://laravel.com/docs/10.x/seeding#running-seeders',
             'descripcion' => fake()->realText(),
-            'usuario_id' => 1,
+            'usuario_id' => fake()->randomElement([1,2,3,4]),
+            'imagen' => fake()->word(),
         ];
     }
 }
