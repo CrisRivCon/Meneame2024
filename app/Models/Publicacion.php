@@ -16,6 +16,8 @@ class Publicacion extends Model
 {
     use HasFactory;
 
+    const MIME_IMAGEN = 'jpg';
+
     protected $table = 'publicaciones';
 
 
