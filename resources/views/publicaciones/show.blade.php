@@ -14,9 +14,6 @@
     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
             <h1 class="max-w-2xl mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-2xl xl:text-2xl dark:text-white">
-                @php
-                    dd($publicacion)
-                @endphp
                 {{$publicacion->titulo}}
             </h1>
             <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-orange-600 rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
@@ -48,7 +45,7 @@
               <div class="inline-flex flex-col w-full rounded-md shadow-sm md:w-auto md:flex-row" role="group">
                 <button type="button"
                         class="px-4 py-2 text-sm font-medium text-orange-600 bg-white border border-gray-200 rounded-t-lg md:rounded-tr-none md:rounded-l-lg hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
-                 <a href="{{route('publicaciones.show', ['publicacione' => $publicacion])}}">Comentarios</a>
+                 <a href="{{route('publicacion.show', ['publicacion' => $publicacion])}}">Comentarios</a>
                 </button>
                 <button type="button"
                         class="px-4 py-2 text-sm font-medium text-orange-600 bg-white border-gray-200 border-x md:border-x-0 md:border-t md:border-b hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
@@ -63,8 +60,39 @@
             </div>
           </div>
         </section>
-        <form action="{{ route('publicaciones.create') }}" class="flex justify-center mt-4 mb-4">
-            <x-primary-button class="bg-green-500 mb-2">Insertar publicación</x-primary-button>
-        </form>
+          @if (count($publicacion->comentarios) > 0)
+            @foreach ($publicacion->comentarios as $comentario)
+            <section class="bg-white dark:bg-gray-900 my-10">
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+
+                <div class="w-full text-orange-600">
+                    <a href="#">
+                        {{ $comentario->usuario->name}}
+                    </a>
+                    <span class="text-gray-700">{{$comentario->created_at->format('d/m H:i')}}</span>
+                </div>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                    <div class="w-full">
+                        {{ $comentario->descripcion }}
+                    </div>
+                </div>
+            </section>
+                @if ($comentario->comentarios)
+                     @foreach ($comentario->comentarios as $subcomentario)
+                        <section class="bg-white dark:bg-gray-900 my-10">
+                            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                                <div class="w-full">
+                                    {{ $subcomentario->descripcion }}
+                                </div>
+                            </div>
+                        </section>
+                    @endforeach
+
+                @endif
+            @endforeach
+            @else
+            No hay comentarios
+            @endif
     </div>
 </x-app-layout>

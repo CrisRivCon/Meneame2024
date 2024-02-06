@@ -44,10 +44,12 @@
 
 
                               <div class="inline-flex flex-col w-full rounded-md shadow-sm md:w-auto md:flex-row" role="group">
+                                  <a href="{{ route('publicacion.show', ['publicacion' => $publicacion]) }}">
                                 <button type="button"
                                         class="px-4 py-2 text-sm font-medium text-orange-600 bg-white border border-gray-200 rounded-t-lg md:rounded-tr-none md:rounded-l-lg hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
-                                 <a href="{{route('publicaciones.show', ['publicacione' => $publicacion])}}">Comentarios</a>
+                                    Comentarios
                                 </button>
+                            </a>
                                 <button type="button"
                                         class="px-4 py-2 text-sm font-medium text-orange-600 bg-white border-gray-200 border-x md:border-x-0 md:border-t md:border-b hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
                                   Compartir
@@ -110,7 +112,7 @@
                 </table>
                     </tr> --}}
                 @endforeach
-        <form action="{{ route('publicaciones.create') }}" class="flex justify-center mt-4 mb-4">
+        <form action="{{ route('publicacion.create') }}" class="flex justify-center mt-4 mb-4">
             <x-primary-button class="bg-green-500 mb-2">Insertar publicación</x-primary-button>
         </form>
     </div>
