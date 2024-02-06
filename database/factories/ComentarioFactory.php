@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Comentario;
 use App\Models\Publicacion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,8 +20,9 @@ class ComentarioFactory extends Factory
     {
         return [
             'descripcion' => fake()->realText(),
-            'publicacion_id' => 1,
             'usuario_id' => 1,
+            'comentable_id' => fake()->randomElement([1,2,3,4]),
+            'comentable_type' => fake()->randomElement([Publicacion::class, Comentario::class]),
         ];
     }
 }
