@@ -26,8 +26,11 @@ class DatabaseSeeder extends Seeder
 
         Comentario::factory()
                     ->count(5)
-                    ->for(Publicacion::factory(), 'comentable')
                     ->create();
+
+        Comentario::factory()
+        ->count(5)
+        ->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
