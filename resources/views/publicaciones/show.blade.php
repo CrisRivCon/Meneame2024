@@ -80,12 +80,21 @@
             </section>
                 @if ($comentario->comentarios)
                      @foreach ($comentario->comentarios as $subcomentario)
-                        <section class="bg-white dark:bg-gray-900 my-10">
+                        <section class="bg-white dark:bg-gray-900 my-10 ml-10">
                             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                                <div class="w-full">
-                                    {{ $subcomentario->descripcion }}
+
+                                <div class="w-full text-orange-600">
+                                    <a href="#">
+                                        {{ $subcomentario->usuario->name}}
+                                    </a>
+                                    <span class="text-gray-700">{{$subcomentario->created_at->format('d/m H:i')}}</span>
                                 </div>
-                            </div>
+                                </div>
+                                <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                                    <div class="w-full">
+                                        {{ $subcomentario->descripcion }}
+                                    </div>
+                                </div>
                         </section>
                     @endforeach
 

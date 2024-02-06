@@ -20,7 +20,7 @@ class ComentarioFactory extends Factory
     {
         return [
             'descripcion' => fake()->realText(),
-            'usuario_id' => 1,
+            'usuario_id' => fake()->randomElement([1,2,3,4,5]),
             'comentable_id' => fake()->randomElement([1,2,3,4]),
             'comentable_type' => fake()->randomElement([Publicacion::class, Comentario::class]),
         ];
