@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('publicaciones.index')" :active="request()->routeIs('publicaciones.index')">
+                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')">
                         Publicaciones
                     </x-nav-link>
                 </div>

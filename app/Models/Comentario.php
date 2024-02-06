@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comentario extends Model
 {
     use HasFactory;
+    protected $fillable = ['descripcion', 'usuario_id'];
 
     public function comentable()
     {
