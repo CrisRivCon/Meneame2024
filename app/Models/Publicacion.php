@@ -79,27 +79,6 @@ class Publicacion extends Model
         $ruta = Storage::path('public/uploads/' . $nombre);
         $imagen->save($ruta);
     }
-/*     // Funciones de la imagen
-    const MIME_IMAGEN = 'jpg';
 
-    private function imagen_url_relativa()
-    {
-        //dd($this->nombre_imagen);
-        return '/uploads/' . $this->nombre_imagen;
-    }
-    public function getImagenUrlAttribute()
-    {
-        return Storage::url(mb_substr($this->imagen_url_relativa(), 1));
-    }
-
-    public function existeImagen()
-    {
-        return Storage::disk('public')->exists($this->imagen_url_relativa());
-    }
-    public function getNombreImagenAttribute()
-    {
-        //dd($this->imagen);
-        return $this->imagen;
-    } */
 
 }

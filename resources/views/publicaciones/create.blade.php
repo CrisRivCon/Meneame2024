@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="w-1/2 mx-auto">
-        <form method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('publicacion.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a href="{{ route('publicaciones.index') }}">
+                <a href="{{ route('publicacion.index') }}">
                     <x-secondary-button class="ms-4">
                         Volver
                         </x-primary-button>

@@ -44,7 +44,7 @@ class PublicacionController extends Controller
 
         $publicacion = new Publicacion();
         $imagen = $request->file('imagen');
-        //dd($request);
+        Storage::makeDirectory('public/uploads');
         $nombre = Carbon::now() . '.jpeg';
         $manager = new ImageManager(new Driver());
         $publicacion->guardarImagen($imagen, $nombre, 200, $manager);
@@ -55,7 +55,7 @@ class PublicacionController extends Controller
         $publicacion->usuario_id = Auth::id();
         $publicacion->save();
 
-        return redirect()->route('publicaciones.index');
+        return redirect()->route('publicacion.index');
     }
 
     /**
