@@ -60,7 +60,8 @@
             </div>
           </div>
         </section>
-          @if (count($publicacion->comentarios) > 0)
+        {{ $publicacion->mostrar_comentarios()}}
+{{--           @if (count($publicacion->comentarios) > 0)
             @foreach ($publicacion->comentarios as $comentario)
             <section class="bg-white dark:bg-gray-900 my-10">
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -97,11 +98,10 @@
                                 </div>
                         </section>
                     @endforeach
-
                 @endif
             @endforeach
             @else
             No hay comentarios
-            @endif
+            @endif --}}
     </div>
 </x-app-layout>

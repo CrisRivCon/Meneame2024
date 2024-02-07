@@ -31,9 +31,9 @@
                         </div>
                         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
                             @if ($publicacion->existeImagen())
-                                <img src="{{ asset($publicacion->imagen_url) }}" alt="mockup"/>
+                                <img src="{{ asset($publicacion->imagen_url) }}" alt=""/>
                             @else
-                                <img src="{{asset("prueba.jpeg")}}" alt="mockup"/>
+                                <img src="{{asset("prueba.jpeg")}}" alt="prueba"/>
                             @endif
                         </div>
                     </div>

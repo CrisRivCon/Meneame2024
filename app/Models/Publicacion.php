@@ -12,6 +12,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Publicacion extends Model
 {
     use HasFactory;
@@ -43,19 +45,9 @@ class Publicacion extends Model
         return '/uploads/' . $this->imagen;
     }
 
-    private function miniatura_url_relativa()
-    {
-        return '/uploads/' . $this->miniatura;
-    }
-
     public function getImagenUrlAttribute()
     {
         return Storage::url(mb_substr($this->imagen_url_relativa(), 1));
-    }
-
-    public function getMiniaturaUrlAttribute()
-    {
-        return Storage::url(mb_substr($this->miniatura_url_relativa(), 1));
     }
 
     public function existeImagen()
@@ -63,12 +55,7 @@ class Publicacion extends Model
         return Storage::disk('public')->exists($this->imagen_url_relativa());
     }
 
-    public function existeMiniatura()
-    {
-        return Storage::disk('public')->exists($this->miniatura_url_relativa());
-    }
-
-    public function guardarImagen(UploadedFile $imagen, string $nombre, int $escala, ?ImageManager $manager = null)
+    public function guardar_imagen(UploadedFile $imagen, string $nombre, int $escala, ?ImageManager $manager = null)
     {
         if ($manager === null) {
             $manager = new ImageManager(new Driver());
@@ -79,27 +66,53 @@ class Publicacion extends Model
         $ruta = Storage::path('public/uploads/' . $nombre);
         $imagen->save($ruta);
     }
-/*     // Funciones de la imagen
-    const MIME_IMAGEN = 'jpg';
 
-    private function imagen_url_relativa()
+    public function mostrar_comentarios(Comentario $comentario = null, $contador = 1)
     {
-        //dd($this->nombre_imagen);
-        return '/uploads/' . $this->nombre_imagen;
-    }
-    public function getImagenUrlAttribute()
-    {
-        return Storage::url(mb_substr($this->imagen_url_relativa(), 1));
-    }
+        if ($comentario == null)
+        {
+            $comentarios = $this->comentarios;
+        }
+        else
+        {
+            $comentarios = $comentario->comentarios;
+        }
+        //dd($comentarios);
+        if (count($comentarios) > 0)
+        {
+            foreach ($comentarios as $comentario)
+            {
+                if ($comentario->comentable_type == Publicacion::class) {
+                    $contador=1;
+                }
+                echo '<section class="bg-white dark:bg-gray-900 my-10" style="margin-left:'.$contador.'em;">
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
 
-    public function existeImagen()
-    {
-        return Storage::disk('public')->exists($this->imagen_url_relativa());
+                    <div class="w-full text-orange-600">
+                        <a href="#">
+                            ' . $comentario->id.' ' . $comentario->usuario->name . '
+                        </a>
+                        <span class="text-gray-700">'.$comentario->created_at->format("d/m H:i").'</span>
+                    </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                        <div class="w-full">
+                            '. $comentario->descripcion.'
+                        </div>
+                    </div>
+                </section>';
+
+                if (count($comentario->comentarios) > 0){
+                    $this->mostrar_comentarios($comentario, $contador+=3);
+                    $contador-=3;
+                }
+
+            }
+        }
+        else
+        {
+            $contador-=3;
+        }
     }
-    public function getNombreImagenAttribute()
-    {
-        //dd($this->imagen);
-        return $this->imagen;
-    } */
 
 }
