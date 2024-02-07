@@ -1,12 +1,6 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
+        <h1 class="font-sans text-4xl text-orange-500 mb-3">Edición del perfil de <strong>{{ Auth::user()->name }}</strong></h1>
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -18,15 +12,16 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-input-label class="font-sans text-2xl text-orange-500" for="name" :value="__('Name')" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-64" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-input-label class="font-sans text-2xl text-orange-500" for="email" :value="__('Email')" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 w-64" :value="old('email', $user->email)" required autocomplete="username" />
+            <button type="submit" class="text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900">Comprobar</button>
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
+
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -48,8 +43,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+            <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white border border-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:focus:ring-orange-900">Actualizar perfil</button>
             @if (session('status') === 'profile-updated')
                 <p
                     x-data="{ show: true }"
