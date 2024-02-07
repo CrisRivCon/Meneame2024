@@ -35,7 +35,7 @@ class Publicacion extends Model
 
     public function meneos(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, "publicacion_usuario", "usuario_id", "usuario_id");
     }
 
 
