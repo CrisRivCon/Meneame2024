@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
+use App\Models\Comentario;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +33,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('publicacion', PublicacionController::class);
+
+Route::get('/comentarios/create/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'create'])
+->middleware('auth')
+->name('hacer_comentario');
+
+Route::post('/comentarios/store/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'store'])
+->middleware('auth')
+->name('guardar_comentario');
 
 require __DIR__.'/auth.php';
