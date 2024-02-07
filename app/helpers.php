@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 function fecha($fecha)
@@ -20,4 +21,9 @@ function obtenerAnyo($fecha)
 function obtenerIp()
 {
     return Http::get('https://ipinfo.io/ip');
+}
+
+function comprobarUserLogeado($user)
+{
+    return ($user->name == Auth::user()->name);
 }
