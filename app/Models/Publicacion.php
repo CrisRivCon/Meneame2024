@@ -12,6 +12,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Publicacion extends Model
 {
     use HasFactory;
@@ -65,5 +67,52 @@ class Publicacion extends Model
         $imagen->save($ruta);
     }
 
+    public function mostrar_comentarios(Comentario $comentario = null, $contador = 1)
+    {
+        if ($comentario == null)
+        {
+            $comentarios = $this->comentarios;
+        }
+        else
+        {
+            $comentarios = $comentario->comentarios;
+        }
+        //dd($comentarios);
+        if (count($comentarios) > 0)
+        {
+            foreach ($comentarios as $comentario)
+            {
+                if ($comentario->comentable_type == Publicacion::class) {
+                    $contador=1;
+                }
+                echo '<section class="bg-white dark:bg-gray-900 my-10" style="margin-left:'.$contador.'em;">
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+
+                    <div class="w-full text-orange-600">
+                        <a href="#">
+                            ' . $comentario->id.' ' . $comentario->usuario->name . '
+                        </a>
+                        <span class="text-gray-700">'.$comentario->created_at->format("d/m H:i").'</span>
+                    </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                        <div class="w-full">
+                            '. $comentario->descripcion.'
+                        </div>
+                    </div>
+                </section>';
+
+                if (count($comentario->comentarios) > 0){
+                    $this->mostrar_comentarios($comentario, $contador+=3);
+                    $contador-=3;
+                }
+
+            }
+        }
+        else
+        {
+            $contador-=3;
+        }
+    }
 
 }
