@@ -4,6 +4,7 @@ use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
 use App\Models\Comentario;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,13 @@ Route::get('/comentarios/create/{comentable}/{tipo}/{publicacion}', [ComentarioC
 ->name('hacer_comentario');
 
 Route::post('/comentarios/store/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'store'])
+->middleware('auth')
+->name('guardar_comentario');
+
+Route::post('/menear/{publicacion}',function(){
+/*     $user = Auth::id();
+    $->roles()->attach($roleId); */
+})
 ->middleware('auth')
 ->name('guardar_comentario');
 
