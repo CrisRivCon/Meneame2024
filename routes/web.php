@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('user/{name}', [ProfileController::class, 'show']);
+
 Route::resource('publicacion', PublicacionController::class);
 
 require __DIR__.'/auth.php';
