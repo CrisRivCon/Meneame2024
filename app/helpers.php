@@ -25,5 +25,7 @@ function obtenerIp()
 
 function comprobarUserLogeado($user)
 {
-    return ($user->name == Auth::user()->name);
+    if (Auth::check()) {
+        return ($user->name == Auth::user()->name);
+    }
 }
