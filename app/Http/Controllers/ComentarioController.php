@@ -35,24 +35,14 @@ class ComentarioController extends Controller
      */
     public function store(Request $request, $comentable, $tipo, Publicacion $publicacion)
     {
-        if ($tipo == "publicacion")
-        {
-            $publicacion = Publicacion::find($comentable);
-            $comentario = $publicacion->comentarios()->create([
-                'descripcion' => $request->descripcion,
-                'usuario_id' => Auth::user()->id,
-            ]);
+        class_alias('App\Models\Publicacion', 'Publicacion');
+        class_alias('App\Models\Comentario', 'Comentario');
 
-        }else if ($tipo == "comentario")
-        {
-            $comentario = Comentario::find($comentable);
-            $comentario = $comentario->comentarios()->create([
-                'descripcion' => $request->descripcion,
-                'usuario_id' => Auth::user()->id,
-            ]);
-
-        }
-
+        $comentable = $tipo::find($comentable);
+        $comentable->comentarios()->create([
+            'descripcion' => $request->descripcion,
+            'usuario_id' => Auth::user()->id,
+        ]);
 
         return redirect()->route('publicacion.show', [
             'publicacion' => $publicacion,
