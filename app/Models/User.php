@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function meneos()
     {
-        return $this->belongsToMany(Publicacion::class, 'publicacion_usuario');
+        return $this->belongsToMany(Publicacion::class, 'publicacion_usuario',"publicacion_usuario", "usuario_id");
     }
 
     public function comentarios()

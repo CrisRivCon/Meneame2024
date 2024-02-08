@@ -1,8 +1,14 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
+use App\Models\Comentario;
+use App\Models\Publicacion;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+use function Laravel\Prompts\alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +22,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $publicaciones = Publicacion::all();
+
+    return view('publicaciones.index',[
+        'publicaciones' => $publicaciones,
+    ]);
 });
 
 Route::get('/dashboard', function () {
@@ -33,5 +44,26 @@ Route::middleware('auth')->group(function () {
 Route::get('user/{name}', [ProfileController::class, 'show']);
 
 Route::resource('publicacion', PublicacionController::class);
+
+Route::get('/comentarios/create/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'create'])
+->middleware('auth')
+->name('hacer_comentario');
+
+Route::post('/comentarios/store/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'store'])
+->middleware('auth')
+->name('guardar_comentario');
+
+Route::get('/menear/{publicacion}', function(Publicacion $publicacion){
+    $user = Auth::user();
+    if(!$publicacion->meneos->find($user)){
+        $publicacion->meneos()->attach($user->id);
+        return redirect()->route('publicacion.index');
+    } else{
+        return redirect()->route('publicacion.index');
+    }
+
+})
+    ->middleware('auth')
+    ->name('menear');
 
 require __DIR__.'/auth.php';
