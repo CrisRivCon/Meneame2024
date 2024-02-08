@@ -22,7 +22,12 @@ use function Laravel\Prompts\alert;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $publicaciones = Publicacion::all();
+
+    return view('publicaciones.index',[
+        'publicaciones' => $publicaciones,
+    ]);
 });
 
 Route::get('/dashboard', function () {
