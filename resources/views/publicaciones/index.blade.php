@@ -1,23 +1,30 @@
 <x-app-layout>
+    <form action="{{ route('publicacion.create') }}" class="flex justify-left ml-2 mt-4 mb-4">
+        <x-primary-button class="bg-orange-500 mb-2">+ Publicaión</x-primary-button>
+    </form>
     <div class="relative overflow-x-auto w-3/4 mx-auto shadow-md sm:rounded-lg">
 
                 @foreach ($publicaciones as $publicacion)
                 <section class="bg-white dark:bg-gray-900 my-10">
-                    <button type="button"
+{{--                     <button type="button"
                     class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-orange-600 rounded-lg md:w-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
               <svg class="h-3.5 w-3.5 mr-2 -ml-1" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                    aria-hidden="true">
                 <path clip-rule="evenodd" fill-rule="evenodd"
                       d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
-              </svg>
-              <a href="{{ route('menear', ['publicacion' => $publicacion]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                <x-primary-button>
-                    Meneame
-                </x-primary-button>
-            </a>
-            </button>
-               {{ $publicacion->meneos->count()}} meneos
-                    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+              </svg> --}}
+                    <div class="flex max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                        <div>
+                            <a href="{{ route('menear', ['publicacion' => $publicacion]) }}" class="flex flex-col items-center justify-center">
+                              <button class="flex flex-col items-center justify-center bg-orange-500 text-white  font-bold py-2 px-4 rounded">
+                                  Menealo
+                              </button>
+                          </a>
+                          </button>
+                          <p class="items-center justify-center px-5 py-3 text-base font-medium text-center">
+                             {{ $publicacion->meneos->count()}} meneos
+                          </p>
+                          </div>
                         <div class="mr-auto place-self-center lg:col-span-7">
                             <h1 class="max-w-2xl mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-2xl xl:text-2xl dark:text-white">
                                 {{$publicacion->titulo}}
@@ -34,7 +41,7 @@
                                 {{$publicacion->url}}
                             </a>
                         </div>
-                        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                        <div class="hidden lg:mt-0 md:w-420 lg:col-span-3 lg:flex">
                             @if ($publicacion->existeImagen())
                                 <img src="{{ asset($publicacion->imagen_url) }}" alt=""/>
                             @else
@@ -116,8 +123,6 @@
                 </table>
                     </tr> --}}
                 @endforeach
-        <form action="{{ route('publicacion.create') }}" class="flex justify-center mt-4 mb-4">
-            <x-primary-button class="bg-green-500 mb-2">Insertar publicación</x-primary-button>
-        </form>
+
     </div>
 </x-app-layout>

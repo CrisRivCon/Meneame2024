@@ -44,6 +44,7 @@ class PublicacionController extends Controller
             'titulo' => 'required|max:255',
             'url' => 'required|max:255',
             'descripcion' => 'required|max:600',
+            'imagen' => 'required|mimes:jpg',
 
         ]);
 
