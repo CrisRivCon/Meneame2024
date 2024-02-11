@@ -19,7 +19,7 @@
         <div>
             <x-input-label class="font-sans text-2xl text-orange-500" for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 w-64" :value="old('email', $user->email)" required autocomplete="username" />
-            <button type="submit" class="text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900">Comprobar</button>
+            <button type="button" class="text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900">Comprobar</button>
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
 
