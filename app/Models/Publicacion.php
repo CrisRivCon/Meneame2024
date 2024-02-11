@@ -23,6 +23,8 @@ class Publicacion extends Model
     protected $table = 'publicaciones';
 
 
+
+
     public function comentarios(): MorphMany
     {
         return $this->morphMany(Comentario::class, 'comentable');

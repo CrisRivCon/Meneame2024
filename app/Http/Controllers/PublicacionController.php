@@ -12,6 +12,11 @@ use Intervention\Image\ImageManager;
 
 class PublicacionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Publicacion::class, 'publicacion');
+    }
     /**
      * Display a listing of the resource.
      */
