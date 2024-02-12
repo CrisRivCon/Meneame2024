@@ -1,18 +1,18 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-orange-600">
-        <div class="flex justify-between h-16">
+    <div class=" mx-auto px-4 sm:px-6 lg:px-8 bg-orange-500 flex justify-center">
+        <div class="flex justify-between h-12" style="min-width: 805px; max-width: 1300px; width:70%;">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="/">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 text-wh" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
+                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')" class="text-white">
                         Edición General
                     </x-nav-link>
                 </div>
@@ -55,7 +55,7 @@
             </div>
             @endauth
             @guest
-            <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+            <x-nav-link :href="route('login')" :active="request()->routeIs('login')" class="text-white">
                 Login
             </x-nav-link>
             @endguest
@@ -73,11 +73,11 @@
     </div>
 
 <!-- Segunda barra de navegación -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+        <div class="flex h-10" style="min-width: 805px; max-width: 1300px; width:70%;">
             <div class="flex">
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:flex">
                     <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')">
                         NUEVAS
                     </x-nav-link>
