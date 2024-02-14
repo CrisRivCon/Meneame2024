@@ -1,18 +1,18 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class=" mx-auto px-4 sm:px-6 lg:px-8 bg-orange-500 flex justify-center">
-        <div class="flex justify-between h-12" style="min-width: 805px; max-width: 1300px; width:70%;">
-            <div class="flex">
+        <div class="flex justify-between h-12 p-1" style="min-width: 805px; max-width: 1300px; width:70%;">
+            <div class="flex ">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center w-32 md:w-auto mr-2">
                     <a href="/">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 text-wh" />
+                        <x-application-logo class="block w-auto fill-current text-gray-800 text-wh" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
-                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')" class="text-white">
+                <div class="hidden sm:flex border-l-2 border-white pl-1">
+                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')" class="text-white" style="font-weight: 900">
                         Edición General
                     </x-nav-link>
                 </div>
@@ -55,9 +55,23 @@
             </div>
             @endauth
             @guest
-            <x-nav-link :href="route('login')" :active="request()->routeIs('login')" class="text-white">
-                Login
-            </x-nav-link>
+            <div class="flex border-l-2 border-gray-500 p-1">
+                <x-nav-link :href="route('login')" :active="request()->routeIs('login')" class="text-white">
+                    login
+                </x-nav-link>
+                <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-white">
+                    registrarse
+                </x-nav-link>
+                <div class="-me-2 flex items-center">
+                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
             @endguest
 
             <!-- Hamburger -->
@@ -78,16 +92,26 @@
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:flex">
-                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')">
+                    <form action="{{ route('publicacion.create') }}" class="flex" style="align-items: center">
+                        <x-primary-button class="bg-gray-300 text-orange-600 h-8">
+                            + Publicar
+                        </x-primary-button>
+                    </form>
+                    <form action="{{ route('publicacion.create') }}" class="flex" style="align-items: center">
+                        <x-primary-button class="bg-gray-300 h-8 text-orange-600">
+                            + Crear artículo
+                        </x-primary-button>
+                    </form>
+                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')" class="text-black">
                         NUEVAS
                     </x-nav-link>
-                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')">
+                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')" class="text-black">
                         ARTÍCULOS
                     </x-nav-link>
-                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')">
+                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')" class="text-black">
                         POPULARES
                     </x-nav-link>
-                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')">
+                    <x-nav-link :href="route('publicacion.index')" :active="request()->routeIs('publicacion.index')" class="text-black">
                         MÁS VISITADAS
                     </x-nav-link>
                 </div>
