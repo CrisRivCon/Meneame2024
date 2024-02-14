@@ -22,7 +22,7 @@ class PublicacionPolicy
      */
     public function view(User $user, Publicacion $publicacion): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -30,7 +30,7 @@ class PublicacionPolicy
      */
     public function create(User $user): bool
     {
-        return Auth::check();
+        return true;
     }
 
     /**

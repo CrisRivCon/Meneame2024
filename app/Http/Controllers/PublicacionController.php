@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publicacion;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -13,18 +15,23 @@ use Intervention\Image\ImageManager;
 class PublicacionController extends Controller
 {
 
-    public function __construct()
+/*      public function __construct()
     {
+
         $this->authorizeResource(Publicacion::class, 'publicacion');
-    }
+    } */
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('publicaciones.index', [
-            'publicaciones' => Publicacion::all(),
-        ]);
+        if (Auth::check()) {
+            $this->authorize('viewAny', Publicacion::class);
+            return view('publicaciones.index', [
+                'publicaciones' => Publicacion::all(),
+            ]);
+        }
+        return Redirect::to('/login');
     }
 
     /**
@@ -32,7 +39,13 @@ class PublicacionController extends Controller
      */
     public function create()
     {
-        return view('publicaciones.create');
+
+        if(Auth::check()){
+            $this->authorize('create', Publicacion::class);
+            return view('publicaciones.create');
+        }
+        return Redirect::to('/login');
+
     }
 
     /**
@@ -40,6 +53,7 @@ class PublicacionController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'titulo' => 'required|max:255',
             'url' => 'required|max:255',
@@ -69,8 +83,10 @@ class PublicacionController extends Controller
      */
     public function show(Publicacion $publicacion)
     {
+
         return view('publicaciones.show', [
             'publicacion' => $publicacion,
+
         ]);
     }
 
