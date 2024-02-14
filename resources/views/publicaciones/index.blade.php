@@ -3,8 +3,8 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
                     @foreach ($publicaciones as $publicacion)
-                    <section class="bg-white dark:bg-gray-900">
-                        <div class="flex max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 grid-cols-3">
+                    <section class="bg-white dark:bg-gray-900 ml-10 mt-10">
+                        <div class="flex max-w-screen-xl px-4 py-4 mx-auto gap-3 xl:gap-0 grid-cols-3">
                             <div class="flex flex-col justify-center">
                                 <p class="px-5 py-3 text-base font-medium text-center">
                                    {{ $publicacion->meneos->count()}} meneos
@@ -15,21 +15,21 @@
                                   </button>
                               </a>
                             </div>
-                            <div class="mr-auto place-self-center lg:col-span-7 p-5">
-                                <h1 class="max-w-2xl mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-2xl xl:text-2xl dark:text-white">
-                                    {{$publicacion->titulo}}
-                                </h1>
+                            <div class="mr-auto place-self-center p-3">
+                                <a href="{{$publicacion->url}}" class="inline-flex items-center justify-center text-base font-medium text-center text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+
+                                    <h1 class="max-w-2xl text-2xl font-extrabold tracking-tight leading-none md:text-2xl xl:text-2xl dark:text-white">
+                                        {{$publicacion->titulo}}
+                                    </h1>
+                                </a>
                                 <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-orange-600 rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                                     por {{$publicacion->usuario->name}} para www.google.com
                                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                 </a>
 
-                                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                                <p class="max-w-2xl font-light text-gray-500 md:text-lg lg:text-xl dark:text-gray-400">
                                     {{$publicacion->descripcion}}
                                 </p>
-                                <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                                    {{$publicacion->url}}
-                                </a>
                             </div>
                             <div class="hidden lg:mt-0 w-40 lg:col-span-3 lg:flex">
                                 @if ($publicacion->existeImagen())
