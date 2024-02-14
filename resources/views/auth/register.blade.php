@@ -12,11 +12,11 @@
             <b class="font-sans text-1xl text-gray-500 mb-6">
                 ¿Quieres ser parte de la comunidad de Menéame? Déjanos contarte de qué va todo este tinglao.</b>
             <b class="font-sans text-1xl mb-6">¿Crees que es importante lo que lees?
-                <a href="{{ url('/') }}" class="font-sans text-1xl text-orange-500 mb-3 text-center">menea la noticia</a>
+                <a href="{{ route('home') }}" class="font-sans text-1xl text-orange-500 mb-3 text-center">menea la noticia</a>
             </b>
             <b class="font-sans text-1xl mb-6">¿Crees que tienes algo que aportar?
                 <b class="font-sans text-1xl text-gray-500 mb-6">Escribe un</b>
-                <a href="{{ url('/') }}" class="font-sans text-1xl text-orange-500 mb-3 text-center">artículo</a>
+                <a href="{{ route('home') }}" class="font-sans text-1xl text-orange-500 mb-3 text-center">artículo</a>
                 <b class="font-sans text-1xl text-gray-500 mb-6">o un comentario </b>
             </b>
         </div>

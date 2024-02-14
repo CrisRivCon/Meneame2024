@@ -28,7 +28,7 @@ Route::get('/', function () {
     return view('publicaciones.index',[
         'publicaciones' => $publicaciones,
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
