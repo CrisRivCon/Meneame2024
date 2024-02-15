@@ -3,6 +3,7 @@
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
+use App\Livewire\Vista;
 use App\Models\Comentario;
 use App\Models\Publicacion;
 use Illuminate\Support\Facades\Auth;
@@ -68,5 +69,7 @@ Route::get('/menear/{publicacion}', function(Publicacion $publicacion){
 })
     ->middleware('auth')
     ->name('menear');
+
+Route::get('/vista', Vista::class);
 
 require __DIR__.'/auth.php';
