@@ -29,3 +29,7 @@ function comprobarUserLogeado($user)
         return ($user->name == Auth::user()->name);
     }
 }
+
+function generarNumeroAleatorio() {
+    return rand(0, 9999999);
+}
