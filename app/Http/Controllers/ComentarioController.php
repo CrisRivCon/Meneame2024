@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ComentarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Comentario::class, 'comentario');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -23,6 +28,8 @@ class ComentarioController extends Controller
      */
     public function create($comentable, $tipo, Publicacion $publicacion)
     {
+        $this->authorize('create', Comentario::class);
+
         return view('comentarios.create', [
             'comentable' => $comentable,
             'tipo' => $tipo,
@@ -35,6 +42,8 @@ class ComentarioController extends Controller
      */
     public function store(Request $request, $comentable, $tipo, Publicacion $publicacion)
     {
+        $this->authorize('create', Comentario::class);
+
         class_alias('App\Models\Publicacion', 'Publicacion');
         class_alias('App\Models\Comentario', 'Comentario');
 
@@ -63,7 +72,9 @@ class ComentarioController extends Controller
      */
     public function edit(Comentario $comentario)
     {
-        //
+        return view('comentarios.edit', [
+            'comentario' => $comentario,
+        ]);
     }
 
     /**
@@ -71,7 +82,7 @@ class ComentarioController extends Controller
      */
     public function update(Request $request, Comentario $comentario)
     {
-        //
+        $comentario->updated(['descripcion' => $request->descripcion]);
     }
 
     /**
@@ -79,6 +90,6 @@ class ComentarioController extends Controller
      */
     public function destroy(Comentario $comentario)
     {
-        //
+
     }
 }
