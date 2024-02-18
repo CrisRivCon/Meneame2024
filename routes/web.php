@@ -3,6 +3,7 @@
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
+use App\Livewire\Vista;
 use App\Models\Comentario;
 use App\Models\Publicacion;
 use App\Models\User;
@@ -70,12 +71,19 @@ Route::get('user/{name}', [ProfileController::class, 'show']);
 Route::resource('publicacion', PublicacionController::class);
 
 Route::get('/comentarios/create/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'create'])
-->middleware('auth')
 ->name('hacer_comentario');
 
 Route::post('/comentarios/store/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'store'])
-->middleware('auth')
 ->name('guardar_comentario');
+
+Route::get('/comentarios/edit/{comentario}/{publicacion}', [ComentarioController::class, 'edit'])
+->name('editar_comentario');
+
+Route::post('/comentarios/{comentario}/{publicacion}', [ComentarioController::class, 'update'])
+->name('actualizar_comentario');
+
+Route::delete('/comentarios/{comentario}/{publicacion}', [ComentarioController::class, 'destroy'])
+->name('borrar_comentario');
 
 Route::get('/menear/{publicacion}', function(Publicacion $publicacion){
     $user = Auth::user();
@@ -89,5 +97,7 @@ Route::get('/menear/{publicacion}', function(Publicacion $publicacion){
 })
     ->middleware('auth')
     ->name('menear');
+
+Route::get('/vista', Vista::class);
 
 require __DIR__.'/auth.php';

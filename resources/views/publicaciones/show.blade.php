@@ -62,6 +62,7 @@
             </div>
           </div>
         </section>
-        {{ $publicacion->mostrar_comentarios()}}
+        <livewire:comentario :publicacion="$publicacion"/>
+        {{-- {{ $publicacion->mostrar_comentarios()}} --}}
     </div>
 </x-app-layout>

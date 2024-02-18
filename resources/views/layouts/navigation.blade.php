@@ -1,7 +1,8 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class=" mx-auto px-4 sm:px-6 lg:px-8 bg-orange-500 flex justify-center">
-        <div class="flex justify-between h-12 p-1" style="min-width: 805px; max-width: 1300px; width:70%;">
+        <div class="flex justify-between h-12
+         p-1" style="min-width: 805px; max-width: 1300px; width:70%;">
             <div class="flex ">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center w-32 md:w-auto mr-2">
@@ -17,10 +18,15 @@
                     </x-nav-link>
                 </div>
             </div>
+            <div class="text-white flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mr-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                  </svg>
+                  <x-text-input class="mr-5"></x-text-input>
 
 
-            @auth
-            <!-- Settings Dropdown -->
+                  @auth
+                  <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -45,7 +51,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -85,6 +91,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <!-- Segunda barra de navegación -->
     <div class="mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">

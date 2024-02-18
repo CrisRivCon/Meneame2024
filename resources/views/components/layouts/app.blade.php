@@ -1,3 +1,3 @@
 <x-app-layout>
-    <livewire:vista/>
+    {{ $slot }}
 </x-app-layout>
