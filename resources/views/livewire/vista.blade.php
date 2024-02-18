@@ -1,4 +1,10 @@
 <div>
+    <div class="text-orange-700 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mr-3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+          <x-text-input class="mr-5" wire:model.live="buscar"></x-text-input>
+    </div>
     <div class=" grid " style="grid-template-columns: 70% 30%">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
@@ -72,7 +78,7 @@
         <aside id="default-sidebar" class=" z-40 w-64 row-span-2 h-fit justify-self-end mr-3  mt-3 hidden lg:block" aria-label="Sidenav">
             <div class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <ul class="space-y-2">
-                    @foreach ($publicaciones as $publicacion)
+                    @foreach ($publicaciones_aside as $publicacion)
 
                     <li>
                         <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
