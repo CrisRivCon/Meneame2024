@@ -6,8 +6,11 @@ use App\Http\Controllers\PublicacionController;
 use App\Livewire\Vista;
 use App\Models\Comentario;
 use App\Models\Publicacion;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+
 
 use function Laravel\Prompts\alert;
 
@@ -29,11 +32,32 @@ Route::get('/', function () {
     return view('publicaciones.index',[
         'publicaciones' => $publicaciones,
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/google-auth/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/google-auth/callback', function () {
+    $user_google = Socialite::driver('google')->user();
+
+    $usuarioExiste = User::where('google_id', $user_google->id)->first();
+
+    $user = User::updateOrCreate([
+        'google_id' => $user_google->id,
+    ], [
+        'name' => ($usuarioExiste && !empty($usuarioExiste->name)) ? $usuarioExiste->name : generarNumeroAleatorio(),
+        'email' => $user_google->email,
+    ]);
+
+    Auth::login($user);
+
+    return redirect('/');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
