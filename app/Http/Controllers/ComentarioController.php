@@ -70,26 +70,37 @@ class ComentarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comentario $comentario)
+    public function edit(Comentario $comentario, Publicacion $publicacion)
     {
+        //dd($this->authorize('update', $comentario));
+        $this->authorize('update', $comentario);
         return view('comentarios.edit', [
             'comentario' => $comentario,
+            'publicacion' => $publicacion,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comentario $comentario)
+    public function update(Request $request, Comentario $comentario, Publicacion $publicacion)
     {
-        $comentario->updated(['descripcion' => $request->descripcion]);
+        $comentario->update(['descripcion' => $request->descripcion]);
+        return view('publicaciones.show', [
+            'publicacion' => $publicacion,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comentario $comentario)
+    public function destroy(Comentario $comentario, Publicacion $publicacion)
     {
+        $this->authorize('delete', $comentario);
+        $comentario->delete();
 
+        return redirect()->route('publicacion.show', [
+            'publicacion' => $publicacion,
+        ]);
     }
 }

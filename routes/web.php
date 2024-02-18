@@ -47,15 +47,19 @@ Route::get('user/{name}', [ProfileController::class, 'show']);
 Route::resource('publicacion', PublicacionController::class);
 
 Route::get('/comentarios/create/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'create'])
-
 ->name('hacer_comentario');
 
 Route::post('/comentarios/store/{comentable}/{tipo}/{publicacion}', [ComentarioController::class, 'store'])
-->middleware('auth')
 ->name('guardar_comentario');
 
-Route::post('/comentarios/edit/{comentario}', [ComentarioController::class, 'edit'])
+Route::get('/comentarios/edit/{comentario}/{publicacion}', [ComentarioController::class, 'edit'])
 ->name('editar_comentario');
+
+Route::post('/comentarios/{comentario}/{publicacion}', [ComentarioController::class, 'update'])
+->name('actualizar_comentario');
+
+Route::delete('/comentarios/{comentario}/{publicacion}', [ComentarioController::class, 'destroy'])
+->name('borrar_comentario');
 
 Route::get('/menear/{publicacion}', function(Publicacion $publicacion){
     $user = Auth::user();

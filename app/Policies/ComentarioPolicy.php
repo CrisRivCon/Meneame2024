@@ -30,7 +30,7 @@ class ComentarioPolicy
      */
     public function create(User $user): bool
     {
-        return Auth::user() != null;
+        return $user != null;
     }
 
     /**
@@ -38,7 +38,7 @@ class ComentarioPolicy
      */
     public function update(User $user, Comentario $comentario): bool
     {
-        return Auth::user() == $comentario->usuario();
+        return $user == $comentario->usuario;
     }
 
     /**
@@ -46,7 +46,7 @@ class ComentarioPolicy
      */
     public function delete(User $user, Comentario $comentario): bool
     {
-        return Auth::user() == $comentario->usuario();
+        return $user == $comentario->usuario;
     }
 
     /**
