@@ -98,6 +98,4 @@ Route::get('/menear/{publicacion}', function(Publicacion $publicacion){
     ->middleware('auth')
     ->name('menear');
 
-Route::get('/vista', Vista::class);
-
 require __DIR__.'/auth.php';
